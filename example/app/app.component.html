@@ -1,6 +1,24 @@
-<div class="greetings center">
-  <div>
-    <h1>{{ 'Angular 5 Library Starter Kit' | taggify }}</h1>
-    <a class="neat shadowy" href="https://github.com/zurfyx/angular-library-starter-kit" rel="noopener" target="_blank">Get your own Angular library published in few minutes</a>
+<div class="container-fluid">
+  <h1>Single select demo</h1>
+  <br>
+
+  <div class="row">
+    <div class="col-md-3">
+      <div>
+        <input type="text">
+      </div>
+      <p>Select Country:</p>
+      <ngz-select [(ngModel)]="country" [disableSearch]="disableSearch" [options]="simpleOptions"></ngz-select>
+      <br>
+      <div>
+        <button (click)="disableSearch = !disableSearch">Disable Search : {{disableSearch}}</button>
+        <button (click)="country = 'de'">set Germany value</button>
+      </div>
+      <br>
+      <div>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Beatae consequuntur cupiditate debitis dolore ducimus
+        fuga, minus nam nesciunt non pariatur porro quae quas rerum veritatis voluptas? Aliquid animi labore minima.
+      </div>
+    </div>
   </div>
 </div>

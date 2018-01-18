@@ -1,19 +1,20 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
-import { TaggifyModule } from '../../src';
-
 import { AppComponent } from './app.component';
+import { NgzSelectModule } from '../../src/ngz-select.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   imports: [
     BrowserModule,
-    TaggifyModule,
+    FormsModule,
+    NgzSelectModule.forRoot()
   ],
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

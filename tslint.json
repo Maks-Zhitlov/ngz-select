@@ -57,10 +57,7 @@
     "no-empty": false,
     "no-empty-interface": true,
     "no-eval": true,
-    "no-inferrable-types": [
-      true,
-      "ignore-params"
-    ],
+    "no-inferrable-types": false,
     "no-misused-new": true,
     "no-non-null-assertion": true,
     "no-shadowed-variable": true,
@@ -115,10 +112,13 @@
       "check-separator",
       "check-type"
     ],
-    "angular-whitespace": [true, "check-interpolation"],
-    "no-output-on-prefix": true,
+    "angular-whitespace": [
+      true,
+      "check-interpolation"
+    ],
+    "no-output-on-prefix": false,
     "use-input-property-decorator": true,
-    "use-output-property-decorator": true,
+    "use-output-property-decorator": false,
     "use-host-property-decorator": true,
     "no-input-rename": true,
     "no-output-rename": true,

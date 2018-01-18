@@ -1,0 +1,398 @@
+$text-color: #333;
+$text-size: 14px;
+
+// inputs
+$input-border-radius: 3px;
+$input-border-color: #cfd3d7;
+$input-border-color-invalid: #DB2828;
+$input-x-padding: 16px;
+$input-y-padding: 8px;
+$input-bg: #fff;
+$input-addon-bg: #fafafa;
+$input-addon-color: #8b97a2;
+$input-description-color: #8b97a2;
+// end inputs
+
+$caret-width: 30px;
+
+$select-item-bg: #eee;
+$select-item-x-padding: $input-x-padding;
+$select-item-y-padding: 10px;
+
+$input-addon-width: ( ( ($input-y-padding * 2) + $text-size ) + 4) * 1;
+
+$select-options-height: 165px;
+
+$color-green: #46bb00;
+$color-blue: #00beef;
+$color-red: #d54c48;
+
+$neutral-button-bg: #fff;
+$neutral-button-color: $text-color;
+$neutral-border-color: $input-border-color;
+$neutral-button-outline: #0070D2;
+
+$primary-button-bg: $color-blue;
+$primary-button-color: #fff;
+
+$success-button-bg: $color-green;
+$success-button-color: #fff;
+
+$success-button-bg: $color-green;
+$success-button-color: #fff;
+
+$danger-button-bg: $color-red;
+$danger-button-color: #fff;
+
+$warning-button-bg: #ffdd1c;
+$warning-button-color: #444;
+
+$button-spinner-size: 18px;
+
+$button-active-outline: #0070D2;
+
+@mixin resetFont() {
+  color: inherit;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+@mixin resetInput() {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  outline: none !important;
+  border-radius: 0;
+  background: transparent;
+  -webkit-appearance: none;
+  white-space: normal;
+  user-select: none;
+  text-decoration: none;
+  @include resetFont;
+}
+
+@mixin resetBtn() {
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+  outline: none !important;
+  background: transparent;
+  border-radius: 0;
+  @include resetFont;
+}
+
+@mixin caretIcon($color) {
+  content: "";
+  border-color: $color transparent transparent;
+  border-style: solid;
+  border-width: 5px 4px 0;
+  height: 0;
+  width: 0;
+}
+
+@mixin centerAbsolut {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+@mixin disableInput {
+  pointer-events: none;
+  opacity: .7;
+  user-select: none;
+  &:after {
+    content: '';
+    display: inline-block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: #000;
+    position: absolute;
+    border-radius: $input-border-radius;
+    opacity: .1;
+    cursor: none;
+  }
+}
+
+@mixin dropdownItemEl {
+  position: relative;
+  cursor: pointer;
+  display: block;
+  border: none;
+  height: auto;
+  text-align: left;
+  border-top: none;
+  line-height: 1em;
+  padding: $select-item-y-padding $select-item-x-padding;
+  font-size: $text-size - 1px;
+  text-transform: none;
+  font-weight: normal;
+  box-shadow: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  //white-space: nowrap;
+}
+
+@mixin selectAddNewBtn {
+  @include resetBtn;
+  padding: $input-y-padding $input-x-padding*2;
+  border-top: 1px solid $input-border-color;
+  width: 100%;
+  position: relative;
+  text-align: left;
+  cursor: pointer;
+  i {
+    font-size: 16px;
+    position: absolute;
+    top: 8px;
+    left: $input-x-padding - 5px;
+  }
+}
+
+@mixin requiredLabel {
+  &:after {
+    content: "*";
+    color: $input-border-color-invalid;
+    display: inline-block;
+    margin-left: 3px;
+    vertical-align: top;
+    margin-top: -2px;
+  }
+}
+
+$caret-width: 30px;
+
+$spiner-items: 12; //Make sure you have enough DOM elements
+$spinner-item-width: 1px;
+$spinner-dimension: 20px;
+$spinner-item-background-color: #666;
+
+:host {
+  display: block;
+  position: relative;
+  width: 100%;
+  background: $input-bg;
+  border: 1px solid $input-border-color;
+  border-radius: $input-border-radius;
+  color: $text-color;
+  font-size: $text-size;
+  vertical-align: middle;
+  .ngz-select {
+    &-input {
+      input[type='text'],
+      textarea {
+        display: block;
+        width: 100%;
+        @include resetInput;
+        padding: $input-y-padding $caret-width $input-y-padding $input-x-padding;
+        line-height: 1.25;
+        resize: none;
+        min-width: 150px;
+        overflow-x: hidden;
+        &[readonly] {
+          cursor: pointer;
+        }
+      }
+    }
+    &-caret {
+      @include resetBtn;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      font-size: 0;
+      color: transparent;
+      width: $caret-width;
+      border-radius: 0 $input-border-radius $input-border-radius 0;
+      cursor: pointer;
+      &:before {
+        @include caretIcon(#888);
+        @include centerAbsolut;
+      }
+    }
+    &-spinner {
+      height: $spinner-dimension;
+      left: 50%;
+      position: absolute;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: $spinner-dimension;
+      > * {
+        background: $spinner-item-background-color;
+        height: $spinner-item-width;
+        width: 25%;
+        left: 50%;
+        opacity: .3;
+        position: absolute;
+        top: 50%;
+        transform-origin: -100% 0;
+
+        @for $spinner from 1 through $spiner-items {
+          &:nth-child(#{$spinner}) {
+            $rotate: (360 / $spiner-items) * $spinner;
+            animation: spinner-animation #{($spiner-items * 1) / 15}s #{($spinner)/15}s infinite;
+            transform: translate(100%, 0) rotate(#{$rotate}deg);
+          }
+        }
+
+        @at-root {
+          @keyframes spinner-animation {
+            0% {
+              opacity: .3
+            }
+            10% {
+              opacity: 1
+            }
+            100% {
+              opacity: .3;
+            }
+          }
+        }
+
+      }
+    }
+    &-results {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: -1px;
+      right: -1px;
+      background: $input-bg;
+      border: 1px solid $input-border-color;
+      border-top-width: 0;
+      margin-top: 1px;
+      border-radius: 0 0 3px 3px;
+      z-index: 102;
+      overflow: hidden;
+      &__list {
+        max-height: $select-options-height;
+        overflow: auto;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+        &.clear-selection {
+          border-top: 1px solid #cfd3d7;
+          li {
+            font-weight: bold;
+            background: transparent !important;
+          }
+        }
+        > p {
+          margin: 0;
+          padding: $input-y-padding + 2px $input-x-padding / 2;
+          font-weight: bold;
+          border-top: 1px solid $input-border-color;
+          line-height: 1;
+          &:first-child {
+            border-top: none;
+          }
+          &.hidden {
+            display: none;
+          }
+        }
+        > li,
+        > ol {
+          @include dropdownItemEl;
+          &.is-selected {
+            font-weight: 600;
+          }
+          &.hidden {
+            display: none;
+          }
+          &:hover,
+          &.is-selected {
+            background-color: $select-item-bg;
+          }
+        }
+        &:hover {
+          > * {
+            &.is-selected {
+              background: transparent;
+              &:hover {
+                background-color: $select-item-bg;
+              }
+            }
+          }
+        }
+        b {
+          display: block;
+          margin-top: 5px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+
+  &.is-disabled {
+    @include disableInput;
+  }
+  &.is-active {
+    border-radius: $input-border-radius $input-border-radius 0 0;
+    .ngz-select-results {
+      display: block;
+    }
+    .ngz-select-caret {
+      &:before {
+        transform: rotate(180deg);
+      }
+    }
+  }
+  &.is-drop-up {
+    .ngz-select-results {
+      top: auto;
+      bottom: 100%;
+      border-radius: $input-border-radius $input-border-radius 0 0;
+      border-top-width: 1px;
+    }
+    border-radius: 0 0 $input-border-radius $input-border-radius;
+  }
+  &.pending-data-load {
+    .ngz-select-caret {
+      &:before,
+      &:after {
+        display: none;
+      }
+    }
+  }
+
+  &__view-item {
+    position: absolute;
+    bottom: 100%;
+    right: 0;
+    margin-bottom: 8px;
+    margin-right: 9px;
+    transition: all .1s linear;
+    opacity: 0;
+    &__btn {
+      @include resetBtn;
+      cursor: pointer;
+      text-decoration: none !important;
+      color: #333 !important;
+      font-size: 13px;
+      i {
+        font-size: 16px;
+        vertical-align: top;
+      }
+    }
+  }
+
+  &__add-new-btn {
+    @include selectAddNewBtn;
+    small {
+      font-size: .75em;
+    }
+  }
+
+}
+
+adm-input-container:hover .adm-select__view-item {
+  opacity: .7;
+  &:hover {
+    opacity: 1;
+  }
+}
